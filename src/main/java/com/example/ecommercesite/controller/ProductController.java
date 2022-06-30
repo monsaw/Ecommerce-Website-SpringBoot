@@ -65,7 +65,6 @@ public class ProductController {
 
     @RequestMapping("/buy/{id}")
     public String buyProduct(@PathVariable(name="id") Long id, Model model){
-//        ModelAndView mav = new ModelAndView("edit_product");
 
         Product product = service.get(id);
         model.addAttribute("product", product);

@@ -8,7 +8,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -44,10 +46,14 @@ public class UserController {
     public String viewUsersList(Model model){
         List<User> allUsers = repository.findAll();
         model.addAttribute("allUsers" , allUsers);
-//        for (var a:allUsers
-//             ) {
-//
-//        }
+
         return "user/users";
     }
+
+    @RequestMapping("/delete/user/{id}")
+        public String deleteUser(@PathVariable(name = "id") Long id){
+        User user = repository.findById(id).get();
+        repository.delete(user);
+
+    return "redirect:/list_users";}
 }

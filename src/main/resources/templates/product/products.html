@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>All Users</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css" />
 </head>
 <body>
+<div th:replace="Fragments/headers :: header"></div>
 <div class="container text-center" >
+
     <div>
-        <form th:action="@{/logout}">
+
             <p>
                 Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
             </p>
-            <input type="submit" value="Sign Out" />
-        </form>
+
     </div>
     <div>
-        <h1>Welcome to Market Place / list of all users</h1>
+        <h1>Welcome to Market Place </h1>
     </div>
 
     <div>
@@ -28,10 +30,8 @@
                 <th>Brand</th>
                 <th>Made In</th>
                 <th>Price</th>
-                <th>Action</th>
-
-
-<!--                <th colspan="2" th:if="${[[${#request.userPrincipal.principal.fullName[0]}]] == 'M'}">Actions</th>-->
+                <th th:if="${#authentication.name != 'lawalmonsaw.lm@gmail.com'}">Action</th>
+                <th colspan="2" th:if="${#authentication.name == 'lawalmonsaw.lm@gmail.com'}">Operations</th>
             </tr>
             </thead>
             <tbody>
@@ -41,7 +41,15 @@
                 <td th:text="${product.brand}">brand</td>
                 <td th:text="${product.madein}">Made In</td>
                 <td th:text="${product.price}">Price</td>
-                <td><a th:href="@{'/buy/' + ${product.id}}">View</a></td>
+                <td><a th:href="@{'/buy/' + ${product.id}}" th:if="${#authentication.name != 'lawalmonsaw.lm@gmail.com'}">View</a></td>
+
+                <td>
+                    <a  th:if="${#authentication.name == 'lawalmonsaw.lm@gmail.com'}" th:href="@{'/edit/' + ${product.id}}">Edit</a>
+                </td>
+
+                <td>
+                    <a  th:if="${#authentication.name == 'lawalmonsaw.lm@gmail.com'}" th:href="@{'/delete/' + ${product.id}}">Delete</a>
+                </td>
 
             </tr>
             </tbody>
