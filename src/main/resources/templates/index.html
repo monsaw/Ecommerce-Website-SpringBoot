@@ -12,21 +12,40 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
+
+    <style>
+        .home{
+            background-image: url('https://thegrandhotram.com/wp-content/uploads/2021/08/The-Grand-Boutique-2.jpg');
+        }
+
+
+    </style>
 </head>
-<body>
 
+
+<body class="home">
 <div th:replace="Fragments/headers :: header"></div>
-    <div class="container text-center" >
-        <div>
-            <h1>Welcome to Market Place.... </h1>
-        </div>
+<div class="container text-center" >
 
 
 
-        <div>
-            <h3><a th:href="@{/register}">Register</a></h3>
-            <h3><a th:href="@{/login}">Login</a></h3>
-        </div>
+</div>
+<div class="bg-image"
+     style="background-image: url('https://static.nike.com/a/images/f_auto/15feea01-6923-4310-a0d6-f4c3717b52b9/image.jpeg');
+            height: 100vh">
+
+    <div align="center" style="position: absolute; top: 15% ; left: 40% ; color:greenyellow">
+        <h1 >Welcome to Market Place.... </h1>
+        <p></p><p></p>
+
+    </div>
+    <h5 style="width: 50% ; position: absolute; top: 40% ; left: 30% ;color:lightgray ; text-align:center">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+       </h5>
+</div>
+
+
 
     </div>
 

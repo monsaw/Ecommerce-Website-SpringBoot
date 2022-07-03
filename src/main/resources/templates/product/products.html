@@ -18,45 +18,45 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
     </div>
     <div>
-        <h1>Welcome to Market Place </h1>
+        <h1>Welcome to Market Place &nbsp; &nbsp; &nbsp; <a  th:if="${#authentication.name != 'lawalmonsaw.lm@gmail.com'}"
+                                                             th:href="@{/cart}" class="btn btn-primary">My Cart</a>
+        </h1>
     </div>
 
-    <div>
-        <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
-            <tr>
-                <th>Product ID</th>
-                <th>Name</th>
-                <th>Brand</th>
-                <th>Made In</th>
-                <th>Price</th>
-                <th th:if="${#authentication.name != 'lawalmonsaw.lm@gmail.com'}">Action</th>
-                <th colspan="2" th:if="${#authentication.name == 'lawalmonsaw.lm@gmail.com'}">Operations</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="product : ${listProducts}">
-                <td th:text="${product.id}">id</td>
-                <td th:text="${product.name}">name</td>
-                <td th:text="${product.brand}">brand</td>
-                <td th:text="${product.madein}">Made In</td>
-                <td th:text="${product.price}">Price</td>
-                <td><a th:href="@{'/buy/' + ${product.id}}" th:if="${#authentication.name != 'lawalmonsaw.lm@gmail.com'}">View</a></td>
 
-                <td>
-                    <a  th:if="${#authentication.name == 'lawalmonsaw.lm@gmail.com'}" th:href="@{'/edit/' + ${product.id}}">Edit</a>
-                </td>
 
-                <td>
-                    <a  th:if="${#authentication.name == 'lawalmonsaw.lm@gmail.com'}" th:href="@{'/delete/' + ${product.id}}">Delete</a>
-                </td>
+<!--    start-->
+    <div class="container" >
+        <div class="row">
+            <p></p> <p></p>
+            <div class="col-3" th:each="product : ${listProducts}">
+    <div class="card"  style="width: 18rem;">
+        <img th:src ="@{${product.image}}"class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title" th:text="'Brand : ' + ${product.brand}">Brand</h5>
+            <p></p>
+            <h5 class="card-title" th:text="'Name : ' + ${product.name}">Name</h5>
+            <p></p>
+            <h5 class="card-title" th:text="'Country : '+ ${product.madein}">Country</h5>
+            <p></p>
 
-            </tr>
-            </tbody>
+            <a  class="btn btn-primary" th:if="${#authentication.name == 'lawalmonsaw.lm@gmail.com'}" th:href="@{'/edit/' + ${product.id}}">Edit</a>
+            <a   class="btn btn-primary" th:href="@{'/buy/' + ${product.id}}" th:if="${#authentication.name != 'lawalmonsaw.lm@gmail.com'}">View</a>
+            <a class="btn btn-primary" th:text="'$ '+ ${product.price}" th:if="${#authentication.name != 'lawalmonsaw.lm@gmail.com'}"> </a>
+            <a  class="btn btn-primary" th:href="@{'/cart/' + ${product.id}}" th:if="${#authentication.name != 'lawalmonsaw.lm@gmail.com'}">Cart</a>
+            <a  class="btn btn-primary" th:if="${#authentication.name == 'lawalmonsaw.lm@gmail.com'}" th:href="@{'/delete/' + ${product.id}}">Delete</a>
+        </div>
 
-        </table>
+
     </div>
+<!--                  <img th:src ="@{${product.image}}"class="card-img-top" alt="...">-->
+            </div>
 
+
+        </div>
+
+    </div>
+<!--stop    -->
 </div>
 
 </body>

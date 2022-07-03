@@ -2,7 +2,7 @@ package com.example.ecommercesite.controller;
 
 
 import com.example.ecommercesite.entity.Product;
-import com.example.ecommercesite.service.custom.ProductService;
+import com.example.ecommercesite.service.custom.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +18,7 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    private ProductService service;
+    private ProductServiceImpl service;
 
 
     @RequestMapping("/product")
@@ -43,7 +43,7 @@ public class ProductController {
         List<Product> listProducts = service.listAll();
         model.addAttribute("listProducts",listProducts);
 
-        return "product/index";
+        return "product/products";
     }
 
     @RequestMapping("/edit/{id}")

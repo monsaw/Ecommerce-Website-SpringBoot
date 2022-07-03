@@ -3,6 +3,7 @@ package com.example.ecommercesite.controller;
 
 import com.example.ecommercesite.entity.User;
 import com.example.ecommercesite.repository.UserRepository;
+import com.example.ecommercesite.service.custom.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ public class UserController {
 
     @Autowired
     UserRepository repository;
+
+    @Autowired
+    UserServiceImpl userServiceImp;
     @GetMapping()
     public String viewHomePage(){
         return "index";
@@ -37,14 +41,16 @@ public class UserController {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encoded = encoder.encode(user.getPassword());
         user.setPassword(encoded);
-      repository.save(user);
+//      repository.save(user);
+      userServiceImp.save(user);
 
       return "authentication/register_success";
     }
 
     @GetMapping("/list_users")
     public String viewUsersList(Model model){
-        List<User> allUsers = repository.findAll();
+//        List<User> allUsers = repository.findAll();
+        List<User> allUsers = userServiceImp.findAllUser();
         model.addAttribute("allUsers" , allUsers);
 
         return "user/users";
@@ -52,8 +58,9 @@ public class UserController {
 
     @RequestMapping("/delete/user/{id}")
         public String deleteUser(@PathVariable(name = "id") Long id){
-        User user = repository.findById(id).get();
-        repository.delete(user);
+        User user = userServiceImp.findById(id);
 
+//        repository.delete(user);
+        userServiceImp.deleteUser(user);
     return "redirect:/list_users";}
 }
